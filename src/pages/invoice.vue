@@ -1076,7 +1076,7 @@ export default {
         // Try to send payment to API
         let response;
         try {
-          response = await fetch('http://127.0.0.1:5000/api/payments', {
+          response = await fetch(`${import.meta.env.VITE_API_URL}/api/payments`, {
             method: 'POST',
             headers: {
               'Authorization': token ? `Bearer ${token}` : '',
@@ -1163,7 +1163,7 @@ export default {
             
             console.log('Updating invoice with discount info:', invoiceUpdateData);
             
-            const updateResponse = await fetch(`http://127.0.0.1:5000/api/invoices/${this.invoice.invoice_id}`, {
+            const updateResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/${this.invoice.invoice_id}`, {
               method: 'PUT',
               headers: {
                 'Authorization': token ? `Bearer ${token}` : '',
@@ -1232,7 +1232,7 @@ export default {
           throw new Error('No authentication token found');
         }
         
-        const response = await fetch('http://127.0.0.1:5000/api/initialize-invoice-tables', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/initialize-invoice-tables`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -1818,7 +1818,7 @@ export default {
         // First check if an invoice already exists for this event
         try {
           console.log('Checking if invoice already exists for event ID:', this.event.events_id);
-          const checkResponse = await fetch(`http://127.0.0.1:5000/api/invoices/event/${this.event.events_id}`, {
+          const checkResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/event/${this.event.events_id}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -1873,7 +1873,7 @@ export default {
         
         // Try API call first, fall back to localStorage if API fails
         try {
-          const response = await fetch('http://127.0.0.1:5000/api/invoices', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -1984,7 +1984,7 @@ export default {
           throw new Error('No authentication token found');
         }
         
-        const response = await fetch(`http://127.0.0.1:5000/api/invoices/${this.invoice.invoice_id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/${this.invoice.invoice_id}`, {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -2039,16 +2039,16 @@ export default {
         
         // Try multiple URL formats, prioritizing the /api version
         const urls = [
-          `http://127.0.0.1:5000/api/invoices/event/${eventId}`,
+          `${import.meta.env.VITE_API_URL}/api/invoices/event/${eventId}`,
           `/api/invoices/event/${eventId}`,
-          `http://127.0.0.1:5000/invoices/event/${eventId}`,
+          `${import.meta.env.VITE_API_URL}/invoices/event/${eventId}`,
           `/invoices/event/${eventId}`,
           // Additional fallbacks
           `/api/invoices/${eventId}`,
-          `http://127.0.0.1:5000/api/invoices/${eventId}`,
+          `${import.meta.env.VITE_API_URL}/api/invoices/${eventId}`,
           // V1 prefix as last resort
           `/v1/invoices/event/${eventId}`,
-          `http://127.0.0.1:5000/v1/invoices/event/${eventId}`
+          `${import.meta.env.VITE_API_URL}/v1/invoices/event/${eventId}`
         ];
         
         let invoiceData = null;
@@ -2141,7 +2141,7 @@ export default {
           throw new Error('No authentication token found');
         }
         
-        const response = await fetch(`http://127.0.0.1:5000/api/payments/invoice/${invoiceId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/payments/invoice/${invoiceId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -2177,9 +2177,8 @@ export default {
         
         // Try multiple URL formats, prioritizing the /api version
         const urls = [
-          `http://127.0.0.1:5000/api/events/${eventId}`,
-          `/api/events/${eventId}`,
-          `http://127.0.0.1:5000/events/${eventId}`,
+          `${import.meta.env.VITE_API_URL}/api/events/${eventId}`,
+          `${import.meta.env.VITE_API_URL}/events/${eventId}`,
           `/events/${eventId}`,
           // Additional fallbacks
           `/api/events/all?id=${eventId}`,
@@ -2213,7 +2212,7 @@ export default {
               if (this.event.wishlist_id && (!this.event.wishlist_venues || this.event.wishlist_venues.length === 0)) {
                 console.log('📋 Fetching wishlist venues directly from API for wishlist ID:', this.event.wishlist_id);
                 try {
-                  const venuesResponse = await fetch(`http://127.0.0.1:5000/api/wishlist-venues/${this.event.wishlist_id}`, {
+                  const venuesResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist-venues/${this.event.wishlist_id}`, {
                     headers: { 
                       'Authorization': `Bearer ${token}`,
                       'Accept': 'application/json'
@@ -2246,7 +2245,7 @@ export default {
                   console.log('📋 Found gown package ID in wishlist_package:', this.event.wishlist_package.gown_package_id);
                   try {
                     // Try to fetch information about this gown package
-                    const gownPackageUrl = `http://127.0.0.1:5000/gown-package-outfits/${this.event.wishlist_package.gown_package_id}`;
+                    const gownPackageUrl = `${import.meta.env.VITE_API_URL}/gown-package-outfits/${this.event.wishlist_package.gown_package_id}`;
                     console.log(`📋 Fetching gown package details from: ${gownPackageUrl}`);
                     
                     const gownResponse = await fetch(gownPackageUrl, {
@@ -2312,10 +2311,10 @@ export default {
                   try {
                     // Try different endpoint formats
                     const endpointFormats = [
-                      `http://127.0.0.1:5000/event/${this.event.events_id}/outfits`,
-                      `http://127.0.0.1:5000/api/event/${this.event.events_id}/outfits`,
-                      `http://127.0.0.1:5000/api/events/${this.event.events_id}/outfits`,
-                      `http://127.0.0.1:5000/api/wishlist-packages/${this.event.wishlist_id}/outfits`
+                      `${import.meta.env.VITE_API_URL}/event/${this.event.events_id}/outfits`,
+                      `${import.meta.env.VITE_API_URL}/api/event/${this.event.events_id}/outfits`,
+                      `${import.meta.env.VITE_API_URL}/api/events/${this.event.events_id}/outfits`,
+                      `${import.meta.env.VITE_API_URL}/api/wishlist-packages/${this.event.wishlist_id}/outfits`
                     ];
                     
                     let outfitsData = null;
@@ -2405,9 +2404,9 @@ export default {
 
         // Try several API endpoints with fallbacks
         const possibleUrls = [
-          `http://127.0.0.1:5000/api/users/${userId}`,
-          `http://127.0.0.1:5000/api/users/info/${userId}`,
-          `http://127.0.0.1:5000/api/user-details/${userId}`
+          `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+          `${import.meta.env.VITE_API_URL}/api/users/info/${userId}`,
+          `${import.meta.env.VITE_API_URL}/api/user-details/${userId}`
         ];
         
         for (const url of possibleUrls) {
@@ -2505,7 +2504,7 @@ export default {
     async fetchDiscounts() {
       try {
         const token = localStorage.getItem('access_token');
-        const response = await fetch('http://127.0.0.1:5000/api/discounts', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/discounts`, {
           method: 'GET',
           headers: {
             'Authorization': token ? `Bearer ${token}` : '',
@@ -2637,7 +2636,7 @@ export default {
         
         console.log('Removing discount from invoice:', invoice_id);
         
-        const response = await fetch(`http://127.0.0.1:5000/api/invoices/${invoice_id}/discount`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/${invoice_id}/discount`, {
           method: 'DELETE',
           headers: {
             'Authorization': token ? `Bearer ${token}` : '',
@@ -2776,7 +2775,7 @@ export default {
           final_amount: newFinalAmount
         });
         
-        const response = await fetch(`http://127.0.0.1:5000/api/invoices/${invoice_id}/discount`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/${invoice_id}/discount`, {
           method: 'POST',
           headers: {
             'Authorization': token ? `Bearer ${token}` : '',

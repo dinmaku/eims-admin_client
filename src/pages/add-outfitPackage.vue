@@ -1357,7 +1357,7 @@
                     return;
                 }
         
-                const response = await axios.get('http://127.0.0.1:5000/gown-packages', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/gown-packages`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -1418,7 +1418,7 @@
                 return;
             }
 
-            const response = await axios.get('http://127.0.0.1:5000/outfits', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/outfits`, {
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -1492,7 +1492,7 @@
                         discount: this.packageDetails.discount || 0
                     };
 
-                    const response = await axios.post('http://127.0.0.1:5000/add-gown-package', packageData, {
+                    const response = await axios.post(`${import.meta.env.VITE_API_URL}/add-gown-package`, packageData, {
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`,
@@ -1596,7 +1596,7 @@
             async fetchPackageOutfits(packageId) {
                 try {
                     const token = localStorage.getItem('access_token');
-                    const response = await axios.get(`http://127.0.0.1:5000/gown-package-outfits/${packageId}`, {
+                    const response = await axios.get(`${import.meta.env.VITE_API_URL}/gown-package-outfits/${packageId}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -1723,7 +1723,7 @@
                       formData.append('outfit_image', this.selectedFile);
                       
                       // Send request to API
-                      const response = await axios.post('http://127.0.0.1:5000/outfits', formData, {
+                      const response = await axios.post(`${import.meta.env.VITE_API_URL}/outfits`, formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data',
                           'Authorization': `Bearer ${token}`
@@ -1753,7 +1753,7 @@
                       };
                       
                       // Send request to API
-                      const response = await axios.post('http://127.0.0.1:5000/outfits', outfitData, {
+                      const response = await axios.post(`${import.meta.env.VITE_API_URL}/outfits`, outfitData, {
                         headers: {
                           'Content-Type': 'application/json',
                           'Authorization': `Bearer ${token}`
@@ -1887,7 +1887,7 @@
                 try {
                     const token = localStorage.getItem('access_token');
                     const response = await axios.put(
-                        `http://127.0.0.1:5000/toggle-package-status/${packages.gown_package_id}`,
+                        `${import.meta.env.VITE_API_URL}/toggle-package-status/${packages.gown_package_id}`,
                         {},
                         {
                             headers: {
@@ -1913,7 +1913,7 @@
             async fetchInactivePackages() {
                 try {
                     const token = localStorage.getItem('access_token');
-                    const response = await axios.get('http://127.0.0.1:5000/inactive-gown-packages', {
+                    const response = await axios.get(`${import.meta.env.VITE_API_URL}/inactive-gown-packages`, {
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
@@ -1937,7 +1937,7 @@
                 
                 try {
                     const token = localStorage.getItem('access_token');
-                    await axios.put(`http://127.0.0.1:5000/toggle-gown-package-status/${this.selectedPackage.gown_package_id}`, {}, {
+                    await axios.put(`${import.meta.env.VITE_API_URL}/toggle-gown-package-status/${this.selectedPackage.gown_package_id}`, {}, {
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
@@ -2011,7 +2011,7 @@
                     console.log('Updating package with data:', packageData);
                     
                     const response = await axios.put(
-                        `http://127.0.0.1:5000/update-gown-package/${this.selectedGownPackage.gown_package_id}`,
+                        `${import.meta.env.VITE_API_URL}/update-gown-package/${this.selectedGownPackage.gown_package_id}`,
                         packageData,
                         {
                             headers: {
@@ -2084,7 +2084,7 @@
             // Fetch the outfit archive data
             const token = localStorage.getItem('access_token');
             try {
-              const response = await axios.get(`http://127.0.0.1:5000/outfits/${outfit.outfit_id}/archive`, {
+              const response = await axios.get(`${import.meta.env.VITE_API_URL}/outfits/${outfit.outfit_id}/archive`, {
                 headers: {
                   'Authorization': `Bearer ${token}`
                 }
@@ -2185,7 +2185,7 @@
                   formData.append('outfit_image', this.editingSelectedFile);
                   
                   // Send request to API
-                  const response = await axios.put(`http://127.0.0.1:5000/outfits/${this.editingOutfit.outfit_id}`, formData, {
+                  const response = await axios.put(`${import.meta.env.VITE_API_URL}/outfits/${this.editingOutfit.outfit_id}`, formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data',
                       'Authorization': `Bearer ${token}`
@@ -2219,7 +2219,7 @@
                   };
                   
                   // Send request to API
-                  const response = await axios.put(`http://127.0.0.1:5000/outfits/${this.editingOutfit.outfit_id}`, outfitData, {
+                  const response = await axios.put(`${import.meta.env.VITE_API_URL}/outfits/${this.editingOutfit.outfit_id}`, outfitData, {
                     headers: {
                       'Content-Type': 'application/json',
                       'Authorization': `Bearer ${token}`

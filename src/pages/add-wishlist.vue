@@ -947,7 +947,7 @@ export default {
             }
             
             console.log('Fetching booked dates with token:', token);
-            const response = await axios.get('http://localhost:5000/events/schedules', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/events/schedules`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             
@@ -1013,7 +1013,7 @@ export default {
         return;
       }
 
-      axios.get('http://127.0.0.1:5000/check-auth', {
+      axios.get(`${import.meta.env.VITE_API_URL}/check-auth`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`
         }
@@ -1044,7 +1044,7 @@ export default {
             return;
           }
 
-          const response = await axios.get('http://127.0.0.1:5000/created-packages', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/created-packages`, {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`,
@@ -1205,7 +1205,7 @@ export default {
                 const token = localStorage.getItem('access_token');
                 if (!token) return;
 
-                const response = await axios.get('http://127.0.0.1:5000/outfits', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/outfits`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -1249,7 +1249,7 @@ export default {
       async fetchPackageDetails(packageId) {
           try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.get(`http://127.0.0.1:5000/packages/${packageId}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/packages/${packageId}`, {
               headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -1282,7 +1282,7 @@ export default {
     async fetchAvailableSuppliers() {
         try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:5000/available-suppliers', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-suppliers`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -1341,7 +1341,7 @@ export default {
         async fetchAvailableVenues() {
           try {
               const token = localStorage.getItem('access_token');
-              const response = await axios.get('http://127.0.0.1:5000/available-venues', {
+              const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-venues`, {
                   headers: {
                       'Authorization': `Bearer ${token}`,
                       'Content-Type': 'application/json'
@@ -1370,7 +1370,7 @@ export default {
     async fetchAvailableGownPackages() {
       try {
           const token = localStorage.getItem('access_token');
-          const response = await axios.get('http://127.0.0.1:5000/available-gown-packages', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-gown-packages`, {
               headers: {
                   'Authorization': `Bearer ${token}`,
                   'Content-Type': 'application/json'
@@ -1400,7 +1400,7 @@ export default {
       async fetchEventTypes() {
           this.eventTypesLoading = true;
           try {
-            const response = await axios.get('http://127.0.0.1:5000/event-types', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/event-types`, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`,
               },
@@ -1417,7 +1417,7 @@ export default {
         async fetchAdditionalServices() {
           try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:5000/additional-services', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/additional-services`, {
               headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -1580,7 +1580,7 @@ export default {
         };
 
         // Create event first
-        const eventResponse = await axios.post('http://127.0.0.1:5000/events', eventData, {
+        const eventResponse = await axios.post(`${import.meta.env.VITE_API_URL}/events`, eventData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -1613,7 +1613,7 @@ export default {
         console.log('Submitting wishlist data:', wishlistData);
 
         // Make API call to save wishlist with authentication
-        const response = await axios.post('http://127.0.0.1:5000/wishlist-packages', wishlistData, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/wishlist-packages`, wishlistData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -1628,7 +1628,7 @@ export default {
             }, 2000);
         } else {
             // If wishlist creation fails, delete the event we just created
-            await axios.delete(`http://127.0.0.1:5000/events/${eventResponse.data.events_id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/events/${eventResponse.data.events_id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

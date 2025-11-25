@@ -58,7 +58,7 @@ export default {
   methods: {
     async handleLogin() {
         try {
-            const response = await axios.post('http://127.0.0.1:5000/login', {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
                 identifier: this.email,
                 password: this.password,
             });

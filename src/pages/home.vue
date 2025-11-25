@@ -178,7 +178,7 @@
             return;
           }
           
-          const response = await axios.get('http://localhost:5000/api/feedback/statistics', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/feedback/statistics`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           
@@ -198,7 +198,7 @@
             return;
           }
           
-          const response = await axios.get('http://localhost:5000/events/schedules', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/events/schedules`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           
@@ -272,7 +272,7 @@
 
       const fetchEventsByMonth = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/events-by-month');
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/events-by-month`);
           const { eventTypes, data } = response.data;
           
           // Create a dataset for each event type
@@ -317,7 +317,7 @@
             return;
           }
 
-          const response = await fetch('http://localhost:5000/events/all', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/events/all`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'

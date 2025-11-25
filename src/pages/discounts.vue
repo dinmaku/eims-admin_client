@@ -280,7 +280,6 @@
 <script>
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://127.0.0.1:5000';
 axios.defaults.withCredentials = true;
 
 export default {
@@ -386,7 +385,7 @@ export default {
         async fetchDiscounts() {
             try {
                 const token = localStorage.getItem('access_token');
-                const response = await axios.get('http://127.0.0.1:5000/api/discounts', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/discounts`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -433,7 +432,7 @@ export default {
 
                 if (this.isEditing) {
                     const response = await axios.put(
-                        `http://127.0.0.1:5000/api/discounts/${this.selectedDiscount.discount_id}`, 
+                        `${import.meta.env.VITE_API_URL}/api/discounts/${this.selectedDiscount.discount_id}`, 
                         payload, 
                         {
                             headers: {
@@ -451,7 +450,7 @@ export default {
                     }
                 } else {
                     const response = await axios.post(
-                        'http://127.0.0.1:5000/api/discounts', 
+                        `${import.meta.env.VITE_API_URL}/api/discounts`, 
                         payload, 
                         {
                             headers: {
@@ -557,7 +556,7 @@ export default {
         async showInactiveDiscounts() {
             try {
                 const token = localStorage.getItem('access_token');
-                const response = await axios.get('http://127.0.0.1:5000/api/discounts/inactive', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/discounts/inactive`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -599,7 +598,7 @@ export default {
                 const token = localStorage.getItem('access_token');
                 
                 const response = await axios.put(
-                    `http://127.0.0.1:5000/api/discounts/${this.pendingDiscount.discount_id}/status`,
+                    `${import.meta.env.VITE_API_URL}/api/discounts/${this.pendingDiscount.discount_id}/status`,
                     { status: this.pendingStatus },
                     {
                         headers: {

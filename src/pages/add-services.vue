@@ -716,7 +716,7 @@ export default {
         }
 
         try {
-          const response = await axios.post('http://127.0.0.1:5000/create-event-type', 
+          const response = await axios.post(`${import.meta.env.VITE_API_URL}/create-event-type`, 
             { event_type_name: this.newEventTypeName.trim() },
             {
               headers: {
@@ -1000,7 +1000,7 @@ export default {
 
             console.log('Sending package data:', packageData);
 
-            const response = await axios.post('http://127.0.0.1:5000/create-package', packageData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/create-package`, packageData, {
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -1072,7 +1072,7 @@ export default {
 
         await this.fetchEventTypes();
 
-        const response = await axios.get('http://127.0.0.1:5000/created-packages', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/created-packages`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -1201,7 +1201,7 @@ export default {
         for (const endpoint of endpoints) {
           try {
             console.log(`Trying endpoint: http://127.0.0.1:5000${endpoint}`);
-            response = await axios.get(`http://127.0.0.1:5000${endpoint}`, {
+            response = await axios.get(`${import.meta.env.VITE_API_URL}${endpoint}`, {
               headers: {
                 'Authorization': `Bearer ${token}`
               }
@@ -1269,10 +1269,10 @@ export default {
               }
 
               const [suppliersResponse, gownPackagesResponse] = await Promise.all([
-                axios.get('http://127.0.0.1:5000/suppliers', {
+                axios.get(`${import.meta.env.VITE_API_URL}/suppliers`, {
                   headers: { Authorization: `Bearer ${token}` },
                 }),
-                axios.get('http://127.0.0.1:5000/gown-packages', {
+                axios.get(`${import.meta.env.VITE_API_URL}/gown-packages`, {
                   headers: { Authorization: `Bearer ${token}` },
                 }),
               ]);
@@ -1297,7 +1297,7 @@ export default {
 
         async fetchEventTypes() {
           try {
-              const response = await axios.get('http://127.0.0.1:5000/event-types');
+              const response = await axios.get(`${import.meta.env.VITE_API_URL}/event-types`);
               this.eventTypes = response.data;
           } catch (error) {
               console.error('Error fetching event types:', error);
@@ -1333,7 +1333,7 @@ export default {
           const token = localStorage.getItem('access_token');
           if (!token) return;
 
-          const response = await axios.get('http://127.0.0.1:5000/additional-services', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/additional-services`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -1387,7 +1387,7 @@ export default {
             console.log("Sending update data:", updateData);
 
             const response = await axios.put(
-                `http://127.0.0.1:5000/package/${this.selectedPackage.packageId}`,
+                `${import.meta.env.VITE_API_URL}/package/${this.selectedPackage.packageId}`,
                 updateData,
                 {
                     headers: {
@@ -1462,7 +1462,7 @@ export default {
           return;
         }
 
-        const response = await axios.delete(`http://127.0.0.1:5000/created-package/${packageId}`, {
+        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/created-package/${packageId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -1704,7 +1704,7 @@ export default {
         });
         
         const response = await axios.put(
-          `http://127.0.0.1:5000/toggle-package-status/${this.pendingPackage.packageId}`,
+          `${import.meta.env.VITE_API_URL}/toggle-package-status/${this.pendingPackage.packageId}`,
           {},
           {
             headers: {
@@ -1763,7 +1763,7 @@ export default {
           throw new Error('Authentication token not found');
         }
 
-        const response = await axios.get('http://127.0.0.1:5000/packages/inactive', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/packages/inactive`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'

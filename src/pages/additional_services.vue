@@ -330,6 +330,7 @@
 <script>
 import axios from 'axios';
 
+
 axios.defaults.withCredentials = true;
 
 export default {
@@ -423,7 +424,7 @@ export default {
                     return;
                 }
 
-                const response = await axios.get('http://127.0.0.1:5000/additional-services', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/additional-services`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -476,7 +477,7 @@ export default {
                     return;
                 }
 
-                const response = await axios.post('http://127.0.0.1:5000/additional-services', {
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/additional-services`, {
                     add_service_name: this.add_service_name,
                     add_service_description: this.add_service_description
                 }, {
@@ -609,7 +610,7 @@ export default {
 
                 const token = localStorage.getItem('access_token');
                 const response = await axios.put(
-                    `http://127.0.0.1:5000/update-additional-service-price/${this.selectedService.add_service_id}`,
+                    `${import.meta.env.VITE_API_URL}/update-additional-service-price/${this.selectedService.add_service_id}`,
                     { price: this.serviceRate },
                     {
                         headers: {
@@ -632,7 +633,7 @@ export default {
         async fetchInactiveServices() {
             try {
                 const token = localStorage.getItem('access_token');
-                const response = await axios.get('http://127.0.0.1:5000/inactive-additional-services', {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/inactive-additional-services`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -648,7 +649,7 @@ export default {
             try {
                 const token = localStorage.getItem('access_token');
                 const response = await axios.put(
-                    `http://127.0.0.1:5000/toggle-additional-service-status/${service.add_service_id}`,
+                    `${import.meta.env.VITE_API_URL}/toggle-additional-service-status/${service.add_service_id}`,
                     {},
                     {
                         headers: {

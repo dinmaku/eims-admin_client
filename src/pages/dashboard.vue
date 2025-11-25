@@ -109,6 +109,7 @@
   import axios from 'axios';
 
 
+
   axios.defaults.withCredentials = true;
 
   export default {
@@ -208,7 +209,7 @@
           return;
         }
 
-        const response = await axios.get('http://127.0.0.1:5000/api/events/wishlist/count', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/events/wishlist/count`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -237,7 +238,7 @@
           return;
         }
 
-        const response = await axios.post('http://127.0.0.1:5000/api/events/wishlist/mark-all-viewed', {}, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/events/wishlist/mark-all-viewed`, {}, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

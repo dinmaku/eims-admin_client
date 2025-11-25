@@ -379,6 +379,7 @@
 <script>
 import axios from 'axios';
 
+
 // axios.defaults.baseURL = 'http://127.0.0.1:5000';
 axios.defaults.withCredentials = true;
 
@@ -475,7 +476,7 @@ methods: {
     async fetchVenues() {
         try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:5000/venues', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/venues`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -523,7 +524,7 @@ methods: {
                 formData.append('venue_image', this.$refs.fileInput.files[0]);
             }
 
-            const response = await axios.post('http://127.0.0.1:5000/venues', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/venues`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -576,7 +577,7 @@ methods: {
                 formData.append('venue_image', this.$refs.editFileInput.files[0]);
             }
 
-            const response = await axios.put(`http://127.0.0.1:5000/venues/${this.selectedVenue.venue_id}`, formData, {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/venues/${this.selectedVenue.venue_id}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -664,7 +665,7 @@ methods: {
     async showInactiveVenues() {
       try {
         const token = localStorage.getItem('access_token');
-        const response = await axios.get('http://127.0.0.1:5000/inactive-venues', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/inactive-venues`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -700,7 +701,7 @@ methods: {
         const token = localStorage.getItem('access_token');
         
         const response = await axios.put(
-          `http://127.0.0.1:5000/toggle-venue-status/${this.pendingVenue.venue_id}`,
+          `${import.meta.env.VITE_API_URL}/toggle-venue-status/${this.pendingVenue.venue_id}`,
           {},
           {
             headers: {
@@ -761,7 +762,7 @@ methods: {
             }
 
             const response = await axios.put(
-                `${this.apiBaseUrl}/update-venue-price/${this.selectedVenue.venue_id}`,
+                `${import.meta.env.VITE_API_URL}/update-venue-price/${this.selectedVenue.venue_id}`,
                 {
                     price: this.venueRate
                 },
