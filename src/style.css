@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face{
+    font-family: 'Raleway';
+    src: url('@/assets/fonts/Raleway-VariableFont_wght.ttf') format('truetype');    
+}
+@font-face{
+    font-family: 'DancingScript';
+    src: url('@/assets/fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'AmaticSC-Bold';
+    src: url('@/assets/fonts/AmaticSC-Bold.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'AmaticSC-Regular';
+    src: url('@/assets/fonts/AmaticSC-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Merriweather-Regular';
+    src: url('@/assets/fonts/Merriweather-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Merriweather-BoldItalic';
+    src: url('@/assets/fonts/Merriweather-BoldItalic.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Quicksand';
+    src: url('@/assets/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Black';
+    src: url('@/assets/fonts/GothicA1-Black.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Bold';
+    src: url('@/assets/fonts/GothicA1-Bold.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-ExtraBold';
+    src: url('@/assets/fonts/GothicA1-ExtraBold.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-ExtraLight';
+    src: url('@/assets/fonts/GothicA1-ExtraLight.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Light';
+    src: url('@/assets/fonts/GothicA1-Light.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Medium';
+    src: url('@/assets/fonts/GothicA1-Medium.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Regular';
+    src: url('@/assets/fonts/GothicA1-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-SemiBold';
+    src: url('@/assets/fonts/GothicA1-SemiBold.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'GothicA1-Thin';
+    src: url('@/assets/fonts/GothicA1-Thin.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Inter';
+    src: url('@/assets/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+    
