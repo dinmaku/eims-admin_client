@@ -729,7 +729,7 @@ export default {
   name: 'ManageUsers',
   data() {
     return {
-      baseURL: 'http://127.0.0.1:5000',
+      baseURL: import.meta.env.VITE_API_URL,
       showTable: 'Suppliers',
       currentSuppliersPage: 1,
       rowsPerSuppliersPage: 5,
