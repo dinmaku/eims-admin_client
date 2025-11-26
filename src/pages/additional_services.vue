@@ -512,7 +512,7 @@ export default {
                     add_service_price: this.selectedService.add_service_price,
                 };
 
-                const response = await axios.put(`http://127.0.0.1:5000/update-service/${this.selectedService.add_service_id}`, payload, {
+                const response = await axios.put(`${import.meta.env.VITE_API_URL}/update-service/${this.selectedService.add_service_id}`, payload, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,

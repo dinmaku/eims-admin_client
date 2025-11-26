@@ -425,7 +425,7 @@ export default {
 
         selectedFileName: null,
         imagePreview: null,
-        apiBaseUrl: 'http://127.0.0.1:5000',
+        apiBaseUrl: import.meta.env.VITE_API_URL,
 
         editSelectedFileName: null,
         editImagePreview: null,

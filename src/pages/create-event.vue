@@ -268,7 +268,7 @@ export default {
               }
 
               const response = await axios.put(
-                  `http://127.0.0.1:5000/booked-wishlist/${this.selectedWishlist.events_id}`,
+                  `${import.meta.env.VITE_API_URL}/booked-wishlist/${this.selectedWishlist.events_id}`,
                   {
                       event_name: this.selectedWishlist.event_name,
                       event_type: this.selectedWishlist.event_type,

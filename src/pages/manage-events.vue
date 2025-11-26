@@ -2241,7 +2241,7 @@
           // Fetch invoices for all events in parallel
           const promises = events.map(async (event) => {
             try {
-              const response = await fetch(`http://127.0.0.1:5000/api/invoices/event/${event.events_id}`, {
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/event/${event.events_id}`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -2579,7 +2579,7 @@
           return;
         }
 
-        const response = await axios.get('http://127.0.0.1:5000/additional-services', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/additional-services`, {
           headers: { 
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -2607,7 +2607,7 @@
           return;
         }
 
-        const response = await fetch('http://127.0.0.1:5000/booked-wishlist', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/booked-wishlist`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -2673,7 +2673,7 @@
         }
         
         console.log('Fetching available suppliers...');
-        const response = await axios.get('http://127.0.0.1:5000/available-suppliers', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-suppliers`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -2715,7 +2715,7 @@
           return;
         }
         
-        const response = await axios.get('http://127.0.0.1:5000/available-venues', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-venues`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -2760,7 +2760,7 @@
         console.log('Adding venue to event:', venueData);
 
         // Call API to add venue to the wishlist
-        const response = await fetch('http://127.0.0.1:5000/api/wishlist-venues', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist-venues`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -2810,7 +2810,7 @@
           return;
         }
         
-        const response = await axios.get('http://127.0.0.1:5000/available-gown-packages', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/available-gown-packages`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -2834,7 +2834,7 @@
           return;
         }
 
-        const response = await axios.get('http://127.0.0.1:5000/outfits', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/outfits`, {
           headers: { 
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -3455,7 +3455,7 @@
                 return;
               } else {
                 // Use direct DELETE for wishlist outfit
-                endpoint = `http://127.0.0.1:5000/api/wishlist-outfits-direct/${item.wishlist_outfit_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-outfits-direct/${item.wishlist_outfit_id}`;
               }
               break;
             }
@@ -3468,7 +3468,7 @@
                 return;
               } else {
                 // Use direct DELETE for wishlist service
-                endpoint = `http://127.0.0.1:5000/api/wishlist-services-direct/${item.id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-services-direct/${item.id}`;
               }
               break;
             }
@@ -3481,7 +3481,7 @@
                 return;
               } else {
                 // Use direct DELETE for wishlist supplier
-                endpoint = `http://127.0.0.1:5000/api/wishlist-suppliers-direct/${item.wishlist_supplier_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-suppliers-direct/${item.wishlist_supplier_id}`;
               }
               break;
             }
@@ -3494,7 +3494,7 @@
                 return;
               } else {
                 // Use direct DELETE for wishlist venue
-                endpoint = `http://127.0.0.1:5000/api/wishlist-venues-direct/${item.wishlist_venue_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-venues-direct/${item.wishlist_venue_id}`;
               }
               break;
             }
@@ -3529,19 +3529,19 @@
             let fallbackEndpoint;
             
             switch (type) {
-              case 'outfits':
-                fallbackEndpoint = `http://127.0.0.1:5000/api/wishlist-outfits/${item.wishlist_outfit_id}`;
-                break;
-              case 'services':
-                fallbackEndpoint = `http://127.0.0.1:5000/api/wishlist-additional-services/${item.id}`;
-                break;
-              case 'suppliers':
-                fallbackEndpoint = `http://127.0.0.1:5000/api/wishlist-suppliers/${item.wishlist_supplier_id}`;
-                break;
-              case 'venues':
-                fallbackEndpoint = `http://127.0.0.1:5000/api/wishlist-venues/${item.wishlist_venue_id}`;
-                break;
-            }
+                case 'outfits':
+                  fallbackEndpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-outfits/${item.wishlist_outfit_id}`;
+                  break;
+                case 'services':
+                  fallbackEndpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-additional-services/${item.id}`;
+                  break;
+                case 'suppliers':
+                  fallbackEndpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-suppliers/${item.wishlist_supplier_id}`;
+                  break;
+                case 'venues':
+                  fallbackEndpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-venues/${item.wishlist_venue_id}`;
+                  break;
+              }
             
             const fallbackResponse = await fetch(fallbackEndpoint, {
               method: 'PUT',
@@ -3776,7 +3776,7 @@
                 return;
               } else {
                 // Update existing wishlist outfit
-                endpoint = `http://127.0.0.1:5000/api/wishlist-outfits/${item.wishlist_outfit_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/events/${this.eventToComplete.events_id}/status`;
                 requestData = {
                   status: newStatus
                 };
@@ -3793,7 +3793,7 @@
                 return;
               } else {
                 // Update existing wishlist service
-                endpoint = `http://127.0.0.1:5000/api/wishlist-additional-services/${item.id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-additional-services/${item.id}`;
                 requestData = {
                   status: newStatus
                 };
@@ -3810,7 +3810,7 @@
                 return;
               } else {
                 // Update existing wishlist supplier
-                endpoint = `http://127.0.0.1:5000/api/wishlist-suppliers/${item.wishlist_supplier_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-suppliers/${item.wishlist_supplier_id}`;
                 requestData = {
                   status: newStatus
                 };
@@ -3827,7 +3827,7 @@
                 return;
               } else {
                 // Update existing wishlist venue
-                endpoint = `http://127.0.0.1:5000/api/wishlist-venues/${item.wishlist_venue_id}`;
+                endpoint = `${import.meta.env.VITE_API_URL}/api/wishlist-venues/${item.wishlist_venue_id}`;
                 requestData = {
                   status: newStatus
                 };
@@ -3884,7 +3884,7 @@
             throw new Error('No authentication token found');
           }
 
-          const response = await fetch(`http://127.0.0.1:5000/events/${this.eventToUpdate.events_id}/status`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${this.eventToUpdate.events_id}/status`, {
             method: 'PUT',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -3956,7 +3956,7 @@
             throw new Error('No authentication token found');
           }
 
-          const response = await fetch('http://127.0.0.1:5000/api/upcoming-events', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/upcoming-events`, {
             headers: {
               'Authorization': `Bearer ${token}`
             },
@@ -4014,7 +4014,7 @@
             const token = localStorage.getItem('access_token');
             if (!token) throw new Error('No authentication token found');
 
-            const response = await fetch(`http://127.0.0.1:5000/events/${this.eventToComplete.events_id}/status`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${this.eventToComplete.events_id}/status`, {
               method: 'PUT',
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -4152,7 +4152,7 @@
           console.log('Wishlist ID:', this.selectedEvent.wishlist_id);
 
           // Create API URL
-          const apiUrl = `http://127.0.0.1:5000/wishlist-packages/${this.selectedEvent.wishlist_id}`;
+          const apiUrl = `${import.meta.env.VITE_API_URL}/wishlist-packages/${this.selectedEvent.wishlist_id}`;
           console.log('API URL:', apiUrl);
 
           // Configure axios request
@@ -4237,17 +4237,17 @@
           // Determine the type of inclusion being updated by checking which ID is present
           if (this.inclusionToUpdate.wishlist_supplier_id) {
             // This is a supplier
-            url = `http://127.0.0.1:5000/api/wishlist-suppliers/${this.inclusionToUpdate.wishlist_supplier_id}`;
+            url = `${import.meta.env.VITE_API_URL}/api/wishlist-suppliers/${this.inclusionToUpdate.wishlist_supplier_id}`;
             data = { status: this.newStatus };
             console.log('Updating supplier status:', data);
           } else if (this.inclusionToUpdate.wishlist_outfit_id) {
             // This is an outfit
-            url = `http://127.0.0.1:5000/api/wishlist-outfits/${this.inclusionToUpdate.wishlist_outfit_id}`;
+            url = `${import.meta.env.VITE_API_URL}/api/wishlist-outfits/${this.inclusionToUpdate.wishlist_outfit_id}`;
             data = { status: this.newStatus };
             console.log('Updating outfit status:', data);
           } else if (this.inclusionToUpdate.wishlist_venue_id) {
             // This is a venue
-            url = `http://127.0.0.1:5000/api/wishlist-venues/${this.inclusionToUpdate.wishlist_venue_id}/status`;
+            url = `${import.meta.env.VITE_API_URL}/api/wishlist-venues/${this.inclusionToUpdate.wishlist_venue_id}/status`;
             data = { status: this.newStatus };
             console.log('Updating venue status:', data);
           } else if (this.inclusionToUpdate.add_service_id) {
@@ -4256,12 +4256,12 @@
               throw new Error('Wishlist ID is missing');
             }
             
-            url = 'http://127.0.0.1:5000/api/wishlist-additional-services/update-status';
+            url = `${import.meta.env.VITE_API_URL}/api/wishlist-additional-services/update-status`;
             data = {
-            wishlist_id: this.selectedEvent.wishlist_id,
-            add_service_id: this.inclusionToUpdate.add_service_id,
-            status: this.newStatus
-          };
+              wishlist_id: this.selectedEvent.wishlist_id,
+              add_service_id: this.inclusionToUpdate.add_service_id,
+              status: this.newStatus
+            };
             console.log('Updating additional service status:', data);
           } else {
             throw new Error('Unknown inclusion type - cannot determine appropriate API endpoint');
@@ -4314,7 +4314,7 @@
           }
 
           // Fetch all events with their status
-          const response = await fetch('http://127.0.0.1:5000/api/check-events-status', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/check-events-status`, {
             headers: {
               'Authorization': `Bearer ${token}`
             },
@@ -4354,7 +4354,7 @@
           }
 
           // Update the event status to exactly 'Upcoming'
-          const response = await fetch(`http://127.0.0.1:5000/events/${event.events_id}/status`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${event.events_id}/status`, {
             method: 'PUT',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -4493,7 +4493,7 @@
           console.log('Fetching events for filtering by date:', today.toISOString());
 
           // Use the existing upcoming-events endpoint 
-          const url = 'http://127.0.0.1:5000/api/upcoming-events';
+          const url = `${import.meta.env.VITE_API_URL}/api/upcoming-events`;
           
           const response = await fetch(url, {
             headers: {
@@ -4691,7 +4691,7 @@
           this.showNotificationModal = true;
 
           // Check for existing invoice
-          const checkResponse = await fetch(`http://127.0.0.1:5000/api/invoices/event/${eventId}`, {
+          const checkResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/event/${eventId}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -4848,7 +4848,7 @@
           }
 
           // Use the selected status from the dropdown
-          const response = await fetch(`http://127.0.0.1:5000/api/wishlist-venues/${this.venueToUpdate.wishlist_venue_id}/status`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist-venues/${this.venueToUpdate.wishlist_venue_id}/status`, {
             method: 'PUT',
             headers: {
               'Authorization': `Bearer ${token}`, 
@@ -4933,7 +4933,7 @@
             throw new Error('No authentication token found. Please log in again.');
           }
 
-          const response = await fetch(`http://127.0.0.1:5000/api/wishlist-venues-direct/${this.selectedEvent.venue.wishlist_venue_id}`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist-venues-direct/${this.selectedEvent.venue.wishlist_venue_id}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -5003,7 +5003,7 @@
               throw new Error('No authentication token found');
             }
 
-            const response = await fetch(`http://127.0.0.1:5000/events/${this.eventToCancel.events_id}/status`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${this.eventToCancel.events_id}/status`, {
               method: 'PUT',
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -5063,7 +5063,7 @@
             throw new Error('No authentication token found');
           }
 
-          const response = await fetch('http://127.0.0.1:5000/events/all', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/events/all`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -5096,7 +5096,7 @@
             throw new Error('No authentication token found');
           }
 
-          const response = await fetch('http://127.0.0.1:5000/events/all', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/events/all`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -5198,7 +5198,7 @@
             return 0;
           }
 
-          const response = await fetch(`http://127.0.0.1:5000/api/invoices/event/${event.events_id}`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices/event/${event.events_id}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -5220,7 +5220,7 @@
           }
 
           // Fetch payments
-          const paymentsResponse = await fetch(`http://127.0.0.1:5000/api/payments/invoice/${invoice.invoice_id}`, {
+          const paymentsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/payments/invoice/${invoice.invoice_id}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -5410,7 +5410,7 @@
         try {
           // Initialize invoice tables
           console.log('Initializing invoice tables...');
-          const initResponse = await fetch('http://127.0.0.1:5000/api/initialize-invoice-tables', {
+          const initResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/initialize-invoice-tables`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -5439,7 +5439,7 @@
           };
 
           // Create the invoice
-          const response = await fetch('http://127.0.0.1:5000/api/invoices', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoices`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -5478,7 +5478,7 @@
             throw new Error('No authentication token found');
           }
 
-          const response = await fetch(`http://127.0.0.1:5000/api/events/${event.events_id}/feedback`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${event.events_id}/feedback`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -5522,7 +5522,7 @@
 
           const promises = this.paginatedFinishedEvents.map(async (event) => {
             try {
-              const response = await fetch(`http://127.0.0.1:5000/api/events/${event.events_id}/feedback`, {
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${event.events_id}/feedback`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${token}`,

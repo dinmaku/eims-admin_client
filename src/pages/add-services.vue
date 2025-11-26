@@ -1200,7 +1200,6 @@ export default {
         // Try each endpoint until we get data
         for (const endpoint of endpoints) {
           try {
-            console.log(`Trying endpoint: http://127.0.0.1:5000${endpoint}`);
             response = await axios.get(`${import.meta.env.VITE_API_URL}${endpoint}`, {
               headers: {
                 'Authorization': `Bearer ${token}`
