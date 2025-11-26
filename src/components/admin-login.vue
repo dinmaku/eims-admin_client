@@ -58,12 +58,6 @@ export default {
   methods: {
     async handleLogin() {
           try {
-            console.log("=== Login attempt started ===");
-            console.log("API URL:", import.meta.env.VITE_API_URL);
-            console.log("Login payload:", {
-              identifier: this.email,
-              password: this.password,
-            });
 
             const response = await axios.post(
               `${import.meta.env.VITE_API_URL}/login`,
