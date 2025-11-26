@@ -57,45 +57,59 @@ export default {
   },
   methods: {
     async handleLogin() {
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
-                identifier: this.email,
-                password: this.password,
+          try {
+            console.log("=== Login attempt started ===");
+            console.log("API URL:", import.meta.env.VITE_API_URL);
+            console.log("Login payload:", {
+              identifier: this.email,
+              password: this.password,
             });
 
+            const response = await axios.post(
+              `${import.meta.env.VITE_API_URL}/login`,
+              {
+                identifier: this.email,
+                password: this.password,
+              }
+            );
+
+            console.log("Login response:", response);
+
             // Store the JWT token in localStorage
-            localStorage.setItem('access_token', response.data.access_token);
-            
+            localStorage.setItem("access_token", response.data.access_token);
+
             // Store the user profile in localStorage
             if (response.data.user_profile) {
-                const userProfile = response.data.user_profile;
-                localStorage.setItem('userProfile', JSON.stringify(userProfile));
-                localStorage.setItem('firstName', userProfile.firstname || '');
-                localStorage.setItem('lastName', userProfile.lastname || '');
-                localStorage.setItem('username', userProfile.email || '');
-                console.log('Stored user profile:', userProfile); // Debug log
+              const userProfile = response.data.user_profile;
+              localStorage.setItem("userProfile", JSON.stringify(userProfile));
+              localStorage.setItem("firstName", userProfile.firstname || "");
+              localStorage.setItem("lastName", userProfile.lastname || "");
+              localStorage.setItem("username", userProfile.email || "");
+              console.log("Stored user profile:", userProfile); // Debug log
             }
 
             // Set the 'loggedIn' status to true
-            localStorage.setItem('loggedIn', 'true');
-
+            localStorage.setItem("loggedIn", "true");
 
             // Emit an event with login success
-            this.$emit('loginSuccess');
+            this.$emit("loginSuccess");
 
             // Redirect to dashboard
-            this.$router.push('/dashboard');
+            this.$router.push("/dashboard");
+          } catch (error) {
+            console.error("=== Login error caught ===");
+            console.error("Error object:", error);
 
-        } catch (error) {
-            // Handle errors during login attempt
             if (error.response && error.response.data) {
-                this.errorMessage = error.response.data.message || 'Login failed. Please check your credentials.';
+              console.error("Error response data:", error.response.data);
+              this.errorMessage =
+                error.response.data.message ||
+                "Login failed. Please check your credentials.";
             } else {
-                this.errorMessage = 'An error occurred. Please try again later.';
+              this.errorMessage = "An error occurred. Please try again later.";
             }
-            console.error('Login error:', error);
-        }
-    },
+          }
+        },
 
     resetLoginForm() {
       this.email = '';
