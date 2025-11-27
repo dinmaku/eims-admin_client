@@ -40,11 +40,11 @@
      <p class = "font-inter font-regular text-lg text-gray-700 mr-5">Total Wishlist</p>
     </div>
     <div class ="w-60 h-[80px] bg-white py-2 px-3 ml-5 mt-10 border-l-2 border-red-400 shadow-md flex items-center justify-between ">
-    <h1 class ="font-inter font-regular text-3xl ml-3 text-blue-900">12</h1>
+    <h1 class ="font-inter font-regular text-3xl ml-3 text-blue-900">{{ totalOngoing }}</h1>
      <p class = "font-inter font-regular text-lg text-gray-700 mr-5">In Progress</p>
     </div>
     <div class ="w-60 h-[80px] bg-white py-2 px-3 ml-5 mt-10 border-l-2 border-yellow-400 shadow-md flex items-center justify-between ">
-    <h1 class ="font-inter font-regular text-3xl ml-3 text-blue-900">98</h1>
+    <h1 class ="font-inter font-regular text-3xl ml-3 text-blue-900">{{ totalFinished }}</h1>
      <p class = "font-inter font-regular text-lg text-gray-700 mr-5">Completed</p>
     </div>
   </div>
@@ -2335,6 +2335,12 @@
     },
     totalWishlist() {
        return this.wishlist.length;
+    },
+    totalOngoing() {
+      return this.ongoingEvents.length;
+    },
+    totalFinished() {
+      return this.finishedEvents.length;
     },
     fullName: {
       get() {
