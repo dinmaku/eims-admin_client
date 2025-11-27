@@ -5499,7 +5499,7 @@
           }
 
           const data = await response.json();
-          this.currentFeedback = data;
+          this.currentFeedback = data.data;
           this.showFeedbackModal = true;
         } catch (error) {
           console.error('Error fetching feedback:', error);
@@ -5535,7 +5535,7 @@
 
               if (response.ok) {
                 const feedback = await response.json();
-                event.feedback = feedback;
+                event.feedback = feedback.data;
               } else if (response.status === 404) {
                 event.feedback = null;
               }
